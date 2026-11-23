@@ -64,3 +64,5 @@ class Zombie:
             self.hit +=1
             if self.hit >= 2:
                 game_world.remove_object(self)
+        if group =='boy:zombie':
+                    pass
