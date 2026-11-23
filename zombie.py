@@ -35,6 +35,7 @@ class Zombie:
         self.dir = random.choice([-1, 1])
         self.size = 200
         self.hit = 0
+        self.box = 100
 
     def update(self):
         dt = game_framework.frame_time
@@ -55,12 +56,14 @@ class Zombie:
         draw_rectangle(*self.get_bb())
 
     def get_bb(self):
-        return self.x - 100, self.y - 100, self.x + 100, self.y + 100
+        return self.x - self.box, self.y - self.box, self.x + self.box, self.y + self.box
 
     def handle_collision(self, group, other):
         if group == 'zombie:ball':
             self.size = self.size/2
+            self.y = self.y - self.size/2
             self.hit +=1
+            self.box = self.box/2
             if self.hit >= 2:
                 game_world.remove_object(self)
         if group =='boy:zombie':
