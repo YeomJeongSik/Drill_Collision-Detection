@@ -22,6 +22,7 @@ MIN_X, MAX_X = 800, 1600  # 좀비가 오가는 구간
 
 class Zombie:
     images = None
+    global size
     def load_images(self):
         if Zombie.images is None:
             Zombie.images = {
@@ -34,6 +35,7 @@ class Zombie:
         self.frame = random.randint(0, 9)
         self.dir = random.choice([-1, 1])
         self.size = 200
+        self.hit = 0
 
     def update(self):
         dt = game_framework.frame_time
@@ -59,3 +61,6 @@ class Zombie:
     def handle_collision(self, group, other):
         if group == 'zombie:ball':
             self.size = self.size/2
+            self.hit +=1
+            if self.hit >= 2:
+                game_world.remove_object(self)
