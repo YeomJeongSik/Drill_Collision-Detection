@@ -58,4 +58,4 @@ class Zombie:
 
     def handle_collision(self, group, other):
         if group == 'zombie:ball':
-            pass
+            self.size = self.size/2
